@@ -5,10 +5,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 from get_csv import getCsv
 
-
+# Lectura del archivo csv
 x, y = getCsv("altura_peso.csv")
 
-
+# Se crea el modelo
 modelo = Sequential()
 input_dim = 1
 output_dim = 1
@@ -22,16 +22,19 @@ modelo.compile(loss='mse', optimizer=sgd)
 
 modelo.summary()
 
-
+# Se entrena el modelo
 num_epochs = 10000
 batch_size = x.shape[0]
 historia = modelo.fit(x, y, epochs=num_epochs, batch_size=batch_size,
 verbose=1)
 
+# Se obtiene los parámetros
 capas = modelo.layers[0]  
 w, b = capas.get_weights() 
 print('Parámetros: w = {:.1f}, b = {:.1f}'.format(w[0][0], b[0]))
 
+
+# Gráficos
 plt.subplot(1,2,1)
 plt.plot(historia.history['loss'])
 plt.xlabel('epoch')
@@ -45,7 +48,8 @@ plt.title('Datos originales y regresión lineal')
 plt.show()
 
 
-x_pred = np.array([170])
+# Predicción
+x_pred = np.array([164])
 y_pred = modelo.predict(x_pred)
 print("El peso será de {:.1f} kg".format(y_pred[0][0]), 
       "para una persona que mide {} cm".format(x_pred[0]))
