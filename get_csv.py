@@ -1,19 +1,9 @@
-import csv
+import pandas as pd
+
+
 def getCsv(file):
-    with open(file, newline='') as archivo:
-        lector_csv= csv.reader(archivo, delimiter=',', quotechar='"')
-        alturas=[]
-        pesos=[]
+    datos = pd.read_csv(file, sep=",", skiprows=32, usecols=[0,1])
+    x = datos.iloc[:,0]
+    y =  datos.iloc[:,1]
 
-
-        for row in lector_csv:
-            altura=row[0]
-            peso=row[1]
-
-            if altura != "Altura":
-                alturas.append(altura)
-                pesos.append(peso)
-
-
-        return alturas,pesos
-
+    return x,y
