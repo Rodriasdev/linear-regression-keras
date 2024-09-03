@@ -18,3 +18,9 @@ modelo.compile(loss='mse', optimizer=sgd)
 
 
 modelo.summary()
+
+
+num_epochs = 40000
+batch_size = x.shape[0]
+historia = modelo.fit(x, y, epochs=num_epochs, batch_size=batch_size,
+verbose=1)
